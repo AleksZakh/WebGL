@@ -49,13 +49,14 @@ for (let i = 0; i < 5; i++) {
   createPlatform(i);  
 }
 
+
 let bridge = new BABYLON.MeshBuilder.CreateBox('box', {
   width: 20,
   height: 0.5,
   depth: 2,
   wrap: true
 }, scene);
-bridge.position = new BABYLON.Vector3(2, platforms[platforms.length - 1].position.y+0.2, platforms[platforms.length - 1].position.z+3);
+bridge.position = new BABYLON.Vector3(1, platforms[platforms.length - 1].position.y+0.5, platforms[platforms.length - 1].position.z+2);
 bridge.material = new BABYLON.StandardMaterial('material', scene);
 bridge.material.emissiveTexture = new BABYLON.Texture('./img/Textura_beton.png', scene);
 shadowGenerator.getShadowMap().renderList.push(bridge);
@@ -88,7 +89,7 @@ let supportLeft = new BABYLON.MeshBuilder.CreateBox('box', {
   depth: 0.5,
   wrap: true
 }, scene);
-supportLeft.position = new BABYLON.Vector3(-7.5, platforms[platforms.length - 1].position.y-1.5, platforms[platforms.length - 1].position.z+3);
+supportLeft.position = new BABYLON.Vector3(-7.7, platforms[platforms.length - 1].position.y-1.5, platforms[platforms.length - 1].position.z+3);
 supportLeft.material = new BABYLON.StandardMaterial('material', scene);
 supportLeft.material.emissiveTexture = new BABYLON.Texture('./img/Textura_beton.png', scene);
 shadowGenerator.getShadowMap().renderList.push(supportLeft);
@@ -101,6 +102,13 @@ camera.setTarget(new BABYLON.Vector3(0, 0, 0));
 
 // Инициализация платформы
 // let box = new BABYLON.Mesh.CreateBox('box', 2, scene);
+
+const ground = BABYLON.MeshBuilder.CreateGround("ground", {width: 30, height: 50, subdivsions: 0}, scene)
+const groundMat = new BABYLON.PBRMaterial("groundMat", scene)
+// groundMat.maxSimultaneousLights = 6;
+// ground.material = groundMat;
+ground.receiveShadows = true;
+ground.emissiveTexture = new BABYLON.Texture('./img/ground-texture.png', scene);
 
 
 
