@@ -74,6 +74,10 @@ module.exports = {
               to: path.resolve(__dirname, 'dist/img')
           },
           { from: 'src/style.css', to: path.resolve(__dirname, 'dist') },
+          {
+            from: path.resolve(__dirname, 'src/models'),
+            to: path.resolve(__dirname, 'dist/models')
+        },
       ]
     }),
   ],

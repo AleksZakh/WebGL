@@ -41,6 +41,9 @@
     "babylonjs-post-process": "^7.10.2",
     "babylonjs-procedural-textures": "^7.10.2",
     "babylonjs-serializers": "^7.10.2",
-    "babylonjs-viewer": "^7.10.2"
+    "babylonjs-viewer": "^7.10.2",
+    "cannon": "^0.6.2",
+    "node": "^18.20.4",
+    "redom": "^4.1.5"
   }
 }

@@ -1,10 +1,73 @@
 
+#load-holder-area {
+    position: absolute;
+    z-index: 20;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
 
-button:active {
+#app, #user-interface {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.move-btn-group {
+    padding: 5px;
+    display: flex;
+    gap: 2px;
+    width: 140px;
+    flex-wrap: wrap;
     position: relative;
-    top: .5px;
-    /* left: .5px; */
-    box-shadow: none;
+    z-index: 15;
+}
+
+.btn-row {
+    display: flex;
+    gap: 2px;
+}
+
+button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.type-btn-group {
+    display: flex;
+    gap: 2px;
+    z-index: 15;
+    position: absolute;
+    top: 5px;
+    /* right: 5px; */
+    left: 200px;
+}
+
+#message-area {
+    position: absolute;
+    top: 20px;
+    left: 500px;
+    z-index: 15;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#add-info-area {
+    position: relative;
+    width: fit-content;
+    z-index: 15;
+    padding: 0 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.msg-area {
+    resize: none;
+    width: 130px;
+    box-shadow: 0px 0px 5px 0px grey inset;
 }
 
 
