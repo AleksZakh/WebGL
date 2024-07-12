@@ -608,10 +608,25 @@ async function main() {
     }
 
     BABYLON.SceneLoader.ImportMesh(null, "./models/Syezd_1/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
-      // console.log(meshes);
+      meshes.splice(1, 1);
+      console.log(meshes);
       let road = meshes[0];
       road.scaling = new BABYLON.Vector3(0.9, 1, 1.2);
-      road.position = new BABYLON.Vector3(6.3, 5.25, 80-(7.4));
+      road.position = new BABYLON.Vector3(6.3, 5.25, 90-(7.4));
+      road.rotate(BABYLON.Axis.Y, 3.2, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road);
+      road.receiveShadows = true;
+      road.checkCollisions = true;
+      road.physicsImpostor = new BABYLON.PhysicsImpostor(road, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Add_modules/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      console.log(meshes);
+      let road = meshes[0];
+      road.scaling = new BABYLON.Vector3(0.9, 1, 1.2);
+      road.position = new BABYLON.Vector3(11, 1, 90);
       road.rotate(BABYLON.Axis.Y, 3.2, BABYLON.Space.WORLD);
       shadowGenerator.addShadowCaster(road);
       road.receiveShadows = true;
@@ -672,6 +687,19 @@ async function main() {
     for (let i = 10; i < 30; i++) {
       newJersi(i);
     }
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/allManHends/", "all-man-hend.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // console.log(meshes);
+      let allManHends = meshes[0];
+      allManHends.scaling = new BABYLON.Vector3(0.02, 0.02, 0.02);
+      allManHends.position = new BABYLON.Vector3(-14.7, -0.65, (3.5)+0.7);
+      shadowGenerator.addShadowCaster(NewJarsi);
+      allManHends.receiveShadows = true;
+      allManHends.checkCollisions = true;
+      // NewJarsi.physicsImpostor = new BABYLON.PhysicsImpostor(NewJarsi, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // NewJarsi.rotate(BABYLON.Axis.Y, 0.96, BABYLON.Space.WORLD);
+      // sceneObjectList.push(town); panelHause
+    })
 
   // =========== Внешние объекты (кон.) ===========
 
