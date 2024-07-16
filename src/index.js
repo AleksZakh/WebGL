@@ -599,39 +599,185 @@ async function main() {
         road.checkCollisions = true;
         road.physicsImpostor = new BABYLON.PhysicsImpostor(road, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
         // sceneObjectList.push(town); panelHause
-      })
-      
+      })      
     }
+
+    let roadSeparation = (xPos, zPos, rotateAngle) => {
+      BABYLON.SceneLoader.ImportMesh(null, "./models/road_separation_fence/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+        // console.log(meshes);
+        let separation = meshes[0];
+        separation.scaling = new BABYLON.Vector3(0.7, 0.9, 0.7);
+        separation.position = new BABYLON.Vector3(xPos, 0, 15-(4*zPos));
+        shadowGenerator.addShadowCaster(separation);
+        separation.receiveShadows = true;
+        separation.checkCollisions = true;
+        separation.physicsImpostor = new BABYLON.PhysicsImpostor(separation, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+        separation.rotate(BABYLON.Axis.Y, rotateAngle, BABYLON.Space.WORLD);
+        // sceneObjectList.push(town); panelHause
+      })
+    };
     
     for (let i = -20; i <= 15; i++) {
       road(i);  
     }
+    for (let i = -10; i < 16; i++) {
+      roadSeparation(-8.5, i, 3*Math.PI/2);
+      roadSeparation(10.5, i, Math.PI/2);
+    }
 
-    BABYLON.SceneLoader.ImportMesh(null, "./models/Syezd_1/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
-      meshes.splice(1, 1);
-      console.log(meshes);
-      let road = meshes[0];
-      road.scaling = new BABYLON.Vector3(0.9, 1, 1.2);
-      road.position = new BABYLON.Vector3(6.3, 5.25, 90-(7.4));
-      road.rotate(BABYLON.Axis.Y, 3.2, BABYLON.Space.WORLD);
-      shadowGenerator.addShadowCaster(road);
-      road.receiveShadows = true;
-      road.checkCollisions = true;
-      road.physicsImpostor = new BABYLON.PhysicsImpostor(road, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Povorot_Right/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let povorot_1 = meshes[0];
+      povorot_1.scaling = new BABYLON.Vector3(1.4, 1, 1.3);
+      povorot_1.position = new BABYLON.Vector3(22, 0.43, 110);
+      povorot_1.rotate(BABYLON.Axis.Y, 3.5, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(povorot_1);
+      povorot_1.receiveShadows = true;
+      povorot_1.checkCollisions = true;
+      povorot_1.physicsImpostor = new BABYLON.PhysicsImpostor(povorot_1, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
       // sceneObjectList.push(town); panelHause
     })
 
-    BABYLON.SceneLoader.ImportMesh(null, "./models/Add_modules/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+
+    // Съезд
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Syezd_0/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      meshes.splice(1, 1);
+      // console.log(meshes);
+      let road_2 = meshes[0];
+      road_2.scaling = new BABYLON.Vector3(0.9, 1, 1.2);
+      road_2.position = new BABYLON.Vector3(9.58, 0.55, 106);
+      road_2.rotate(BABYLON.Axis.Y, 3.198, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road_2);
+      road_2.receiveShadows = true;
+      road_2.checkCollisions = true;
+      road_2.physicsImpostor = new BABYLON.PhysicsImpostor(road_2, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Polotno_three_lines/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let road_ = meshes[0];
+      road_.scaling = new BABYLON.Vector3(1.4, 1, 1.3);
+      road_.position = new BABYLON.Vector3(4.42, 0.2, 90);
+      road_.rotate(BABYLON.Axis.Y, 3.142, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road_);
+      road_.receiveShadows = true;
+      road_.checkCollisions = true;
+      road_.physicsImpostor = new BABYLON.PhysicsImpostor(road_, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Polotno_three_lines/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let road__ = meshes[0];
+      road__.scaling = new BABYLON.Vector3(1.4, 1, 1.3);
+      road__.position = new BABYLON.Vector3(4.42, 0.25, 85);
+      road__.rotate(BABYLON.Axis.Y, 3.142, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road__);
+      road__.receiveShadows = true;
+      road__.checkCollisions = true;
+      road__.physicsImpostor = new BABYLON.PhysicsImpostor(road__, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Polotno_three_lines/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let road___ = meshes[0];
+      road___.scaling = new BABYLON.Vector3(1.4, 1, 1.3);
+      road___.position = new BABYLON.Vector3(4.42, 0.25, 80);
+      road___.rotate(BABYLON.Axis.Y, 3.142, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road___);
+      road___.receiveShadows = true;
+      road___.checkCollisions = true;
+      road___.physicsImpostor = new BABYLON.PhysicsImpostor(road___, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Polotno_three_lines/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let road___0 = meshes[0];
+      road___0.scaling = new BABYLON.Vector3(1.4, 1, 1.3);
+      road___0.position = new BABYLON.Vector3(4.42, 0.25, 75);
+      road___0.rotate(BABYLON.Axis.Y, 3.142, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road___0);
+      road___0.receiveShadows = true;
+      road___0.checkCollisions = true;
+      road___0.physicsImpostor = new BABYLON.PhysicsImpostor(road___0, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/road_empty/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let road_0 = meshes[0];
+      road_0.scaling = new BABYLON.Vector3(1, 1, 7);
+      road_0.position = new BABYLON.Vector3(18, 0.15, 106);
+      road_0.rotate(BABYLON.Axis.Y, 3.25, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road_0);
+      road_0.receiveShadows = true;
+      road_0.checkCollisions = true;
+      road_0.physicsImpostor = new BABYLON.PhysicsImpostor(road_0, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/road_empty/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let road__0 = meshes[0];
+      road__0.scaling = new BABYLON.Vector3(1.3, 1, 2);
+      road__0.position = new BABYLON.Vector3(28, 0, 122);
+      road__0.rotate(BABYLON.Axis.Y, 3.77, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road__0);
+      road__0.receiveShadows = true;
+      road__0.checkCollisions = true;
+      road__0.physicsImpostor = new BABYLON.PhysicsImpostor(road__0, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/road_empty/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let road__ = meshes[0];
+      road__.scaling = new BABYLON.Vector3(0.6, 1 , 0.7);
+      road__.position = new BABYLON.Vector3(13.5, 0.3, 68);
+      road__.rotate(BABYLON.Axis.Y, 3.178, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road__);
+      road__.receiveShadows = true;
+      road__.checkCollisions = true;
+      road__.physicsImpostor = new BABYLON.PhysicsImpostor(road__, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Povorot_90/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
       // meshes.splice(1, 1);
       console.log(meshes);
-      let road = meshes[0];
-      road.scaling = new BABYLON.Vector3(0.9, 1, 1.2);
-      road.position = new BABYLON.Vector3(11, 1, 90);
-      road.rotate(BABYLON.Axis.Y, 3.2, BABYLON.Space.WORLD);
-      shadowGenerator.addShadowCaster(road);
-      road.receiveShadows = true;
-      road.checkCollisions = true;
-      road.physicsImpostor = new BABYLON.PhysicsImpostor(road, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      let povorot_2 = meshes[0];
+      povorot_2.scaling = new BABYLON.Vector3(1.4, 1, 1.3);
+      povorot_2.position = new BABYLON.Vector3(36, 0.2, 119);
+      povorot_2.rotate(BABYLON.Axis.Y, 4.25, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(povorot_2);
+      povorot_2.receiveShadows = true;
+      povorot_2.checkCollisions = true;
+      povorot_2.physicsImpostor = new BABYLON.PhysicsImpostor(povorot_2, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      // sceneObjectList.push(town); panelHause
+    })
+    BABYLON.SceneLoader.ImportMesh(null, "./models/road_empty/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // meshes.splice(1, 1);
+      // console.log(meshes);
+      let road__1 = meshes[0];
+      road__1.scaling = new BABYLON.Vector3(1.3, 1, 2);
+      road__1.position = new BABYLON.Vector3(45, 0, 121);
+      road__1.rotate(BABYLON.Axis.Y, 4.8, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(road__1);
+      road__1.receiveShadows = true;
+      road__1.checkCollisions = true;
+      road__1.physicsImpostor = new BABYLON.PhysicsImpostor(road__1, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
       // sceneObjectList.push(town); panelHause
     })
 
@@ -649,6 +795,21 @@ async function main() {
   
 
   // =========== Внешние объекты (нач.) ===========
+  BABYLON.SceneLoader.ImportMesh(null, "./models/gasStation/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+    // console.log(meshes);
+    let gasStation = meshes[0];
+    gasStation.scaling = new BABYLON.Vector3(2.5, 2.5, 2.5);
+    gasStation.position = new BABYLON.Vector3(70, -0.1, 140);
+    shadowGenerator.addShadowCaster(gasStation);
+    gasStation.receiveShadows = true;
+    gasStation.checkCollisions = true;
+    // NewJarsi.physicsImpostor = new BABYLON.PhysicsImpostor(NewJarsi, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);      
+    gasStation.rotate(BABYLON.Axis.Y, Math.PI/2, BABYLON.Space.WORLD);
+    // allManHends.rotate(BABYLON.Axis.X, Math.PI/2, BABYLON.Space.WORLD);
+    // sceneObjectList.push(town); panelHause
+  })
+
+
     let fanStolbCreate = (zPos) => {
       BABYLON.SceneLoader.ImportMesh(null, "./models/Fanar_stolb/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
         // console.log(meshes);
@@ -671,8 +832,8 @@ async function main() {
       BABYLON.SceneLoader.ImportMesh(null, "./models/NewJarsi/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
         // console.log(meshes);
         let NewJarsi = meshes[0];
-        NewJarsi.scaling = new BABYLON.Vector3(0.02, 0.02, 0.02);
-        NewJarsi.position = new BABYLON.Vector3(-14.7, -0.65, (3.5*zPos)+0.7);
+        NewJarsi.scaling = new BABYLON.Vector3(0.015, 0.015, 0.015);
+        NewJarsi.position = new BABYLON.Vector3(-10.8, -0.65, (2.7*zPos)+2.8);
         shadowGenerator.addShadowCaster(NewJarsi);
         NewJarsi.receiveShadows = true;
         NewJarsi.checkCollisions = true;
@@ -681,28 +842,46 @@ async function main() {
         // sceneObjectList.push(town); panelHause
       })
     }
-    for (let i = -19; i < 8; i++) {
+    for (let i = -19; i < 9; i++) {
       newJersi(i);      
     }
-    for (let i = 10; i < 30; i++) {
+    for (let i = 11; i < 30; i++) {
       newJersi(i);
     }
 
-    BABYLON.SceneLoader.ImportMesh(null, "./models/allManHends/", "all-man-hend.gltf", scene, function (meshes, particleSystems, skeletons) {
-      // console.log(meshes);
-      let allManHends = meshes[0];
-      allManHends.scaling = new BABYLON.Vector3(0.02, 0.02, 0.02);
-      allManHends.position = new BABYLON.Vector3(-14.7, -0.65, (3.5)+0.7);
-      shadowGenerator.addShadowCaster(NewJarsi);
-      allManHends.receiveShadows = true;
-      allManHends.checkCollisions = true;
-      // NewJarsi.physicsImpostor = new BABYLON.PhysicsImpostor(NewJarsi, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
-      // NewJarsi.rotate(BABYLON.Axis.Y, 0.96, BABYLON.Space.WORLD);
-      // sceneObjectList.push(town); panelHause
-    })
+    
 
   // =========== Внешние объекты (кон.) ===========
 
+}
+
+function hendsCreate(params) {
+  if(params === 'create'){
+    BABYLON.SceneLoader.ImportMesh(null, "./models/allManHends/", "all-man-hend.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // console.log(meshes);
+      let allManHends = meshes[0];
+      allManHends.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
+      allManHends.position = new BABYLON.Vector3(10, 2, -10);
+      shadowGenerator.addShadowCaster(allManHends);
+      allManHends.receiveShadows = true;
+      allManHends.checkCollisions = true;
+      // NewJarsi.physicsImpostor = new BABYLON.PhysicsImpostor(NewJarsi, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);      
+      allManHends.rotate(BABYLON.Axis.Y, 3*Math.PI/2, BABYLON.Space.WORLD);
+      allManHends.rotate(BABYLON.Axis.X, Math.PI/2, BABYLON.Space.WORLD);
+      // sceneObjectList.push(town); panelHause
+    })
+  } else if(params === 'delete') {
+    console.log(scene);
+    // scene.removeMesh(allManHends);
+    // ground.dispose();
+    // scene.debugLayer.show({embedMode:true});
+    scene.meshes.forEach(element => {
+      if(element.name.includes('Male_hand_40plus')) {
+        scene.meshes.splice(scene.meshes.indexOf(element), 2);
+      }
+    });
+  }
+  
 }
 
 // ============================================
@@ -852,11 +1031,13 @@ document.querySelectorAll('#user-interface .type-btn-group button').forEach(butt
       universaCamera.applyGravity = true;
       canvas.addEventListener("pointerup", lockEnable);
       console.log(universaCamera)
+      hendsCreate('create');
     } else if(button.id === 'eye-btn') {
       scene.activeCamera = rotateCamera;
       rotateCamera.setPosition(new BABYLON.Vector3(0, 15, 45));
       rotateCamera.speed = 0.08;
-      canvas.addEventListener("pointerup", lockRelease);      
+      canvas.addEventListener("pointerup", lockRelease);
+      hendsCreate('delete');
     }
   })
   
