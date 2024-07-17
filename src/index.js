@@ -132,7 +132,7 @@ async function main() {
 
 
   //---------- Инициализация поверхности земли ----------------
-    for (let x = -10; x < 10; x++) {
+    for (let x = -10; x < 11; x++) {
       for (let z = -10; z < 20; z++) {
         groundCreate(x*10, 0, z*10);
       }
@@ -607,7 +607,7 @@ async function main() {
         // console.log(meshes);
         let separation = meshes[0];
         separation.scaling = new BABYLON.Vector3(0.7, 0.9, 0.7);
-        separation.position = new BABYLON.Vector3(xPos, 0, 15-(4*zPos));
+        separation.position = new BABYLON.Vector3(xPos, 0, 18.5-(4*zPos));
         shadowGenerator.addShadowCaster(separation);
         separation.receiveShadows = true;
         separation.checkCollisions = true;
@@ -620,9 +620,13 @@ async function main() {
     for (let i = -20; i <= 15; i++) {
       road(i);  
     }
-    for (let i = -10; i < 16; i++) {
-      roadSeparation(-8.5, i, 3*Math.PI/2);
-      roadSeparation(10.5, i, Math.PI/2);
+    for (let i = -12; i < 23; i++) {
+      roadSeparation(-8.3, i, 3*Math.PI/2);
+      roadSeparation(10.3, i, Math.PI/2);
+    }
+
+    for (let i = -40; i < -21; i++) {
+      roadSeparation(10.3, i, 3*Math.PI/2);      
     }
 
     BABYLON.SceneLoader.ImportMesh(null, "./models/Povorot_90/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
@@ -754,6 +758,19 @@ async function main() {
       // sceneObjectList.push(town); panelHause
     })
 
+    BABYLON.SceneLoader.ImportMesh(null, "./models/road_separation_fence/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // console.log(meshes);
+      let separation = meshes[0];
+      separation.scaling = new BABYLON.Vector3(0.7, 0.9, 0.7); //(9.58, 0.55, 106)
+      separation.position = new BABYLON.Vector3(9.58, 0.55, 90);
+      shadowGenerator.addShadowCaster(separation);
+      separation.receiveShadows = true;
+      separation.checkCollisions = true;
+      separation.physicsImpostor = new BABYLON.PhysicsImpostor(separation, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      separation.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
+      // sceneObjectList.push(town); panelHause
+    })
+
     // BABYLON.SceneLoader.ImportMesh(null, "./models/Povorot_90/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
     //   // meshes.splice(1, 1);
     //   console.log(meshes);
@@ -799,7 +816,7 @@ async function main() {
     // console.log(meshes);
     let gasStation = meshes[0];
     gasStation.scaling = new BABYLON.Vector3(2.5, 2.5, 2.5);
-    gasStation.position = new BABYLON.Vector3(70, -0.3, 140);
+    gasStation.position = new BABYLON.Vector3(70, -0.35, 140);
     shadowGenerator.addShadowCaster(gasStation);
     gasStation.receiveShadows = true;
     gasStation.checkCollisions = true;
@@ -808,6 +825,22 @@ async function main() {
     // allManHends.rotate(BABYLON.Axis.X, Math.PI/2, BABYLON.Space.WORLD);
     // sceneObjectList.push(town); panelHause
   })
+
+  BABYLON.SceneLoader.ImportMesh(null, "./models/russian_gas_station/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+    // console.log(meshes);
+    let gasStationRu = meshes[0];
+    gasStationRu.scaling = new BABYLON.Vector3(0.02, 0.02, 0.02);
+    gasStationRu.position = new BABYLON.Vector3(-30, 2.3, -30);
+    shadowGenerator.addShadowCaster(gasStationRu);
+    gasStationRu.receiveShadows = true;
+    gasStationRu.checkCollisions = true;
+    // NewJarsi.physicsImpostor = new BABYLON.PhysicsImpostor(NewJarsi, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);      
+    gasStationRu.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
+    // allManHends.rotate(BABYLON.Axis.X, Math.PI/2, BABYLON.Space.WORLD);
+    // sceneObjectList.push(town); panelHause
+  })
+
+
 
 
     let fanStolbCreate = (zPos) => {
@@ -824,7 +857,7 @@ async function main() {
         // sceneObjectList.push(town); panelHause
       })
     }
-    for (let i = -2; i < 3; i++) {
+    for (let i = -1; i < 4; i++) {
       fanStolbCreate(i);      
     }
 
@@ -842,12 +875,74 @@ async function main() {
         // sceneObjectList.push(town); panelHause
       })
     }
-    for (let i = -19; i < 9; i++) {
+    for (let i = -25; i < 9; i++) {
       newJersi(i);      
     }
-    for (let i = 11; i < 30; i++) {
+    for (let i = 11; i < 45; i++) {
       newJersi(i);
     }
+
+    // ====== знак заправки ===============
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Gas_sign/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // console.log(meshes);
+      let gasSign = meshes[0];
+      gasSign.id = 'gas_sign';
+      gasSign.name ='gas_sign';
+      gasSign.descript = 'Заправка';
+      gasSign.scaling = new BABYLON.Vector3(0.3, 0.3, 0.3);
+      gasSign.position = new BABYLON.Vector3(10.5, 0, -15);
+      shadowGenerator.addShadowCaster(gasSign);
+      gasSign.receiveShadows = true;
+      gasSign.checkCollisions = true;
+      gasSign.physicsImpostor = new BABYLON.PhysicsImpostor(gasSign, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      sceneObjectList.push(gasSign);
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Syezd_strelka/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // console.log(meshes);
+      let strelkaRight = meshes[0];
+      strelkaRight.id = 'strelka-right';
+      strelkaRight.name ='strelka-right';
+      strelkaRight.descript = 'Разметка съезд направо';
+      strelkaRight.scaling = new BABYLON.Vector3(0.03, 0.03, 0.03);
+      strelkaRight.position = new BABYLON.Vector3(7.7, 0.5, -0.65);
+      strelkaRight.rotate(BABYLON.Axis.Z, Math.PI, BABYLON.Space.WORLD);
+      shadowGenerator.addShadowCaster(strelkaRight);
+      strelkaRight.receiveShadows = true;
+      strelkaRight.checkCollisions = true;
+      strelkaRight.physicsImpostor = new BABYLON.PhysicsImpostor(strelkaRight, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      sceneObjectList.push(strelkaRight);
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Strelka/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // console.log(meshes);
+      let strelka = meshes[0];
+      strelka.id = 'strelka-forward';
+      strelka.name ='strelka-forward';
+      strelka.descript = 'Разметка проезд прямо';
+      strelka.scaling = new BABYLON.Vector3(0.03, 0.03, 0.03);
+      strelka.position = new BABYLON.Vector3(3.9, 1.2, -1);
+      shadowGenerator.addShadowCaster(strelka);
+      strelka.receiveShadows = true;
+      strelka.checkCollisions = true;
+      strelka.physicsImpostor = new BABYLON.PhysicsImpostor(strelka, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      sceneObjectList.push(strelka);
+    })
+
+    BABYLON.SceneLoader.ImportMesh(null, "./models/roadSings/speed70/", "speed70.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // console.log(meshes);
+      let speed70 = meshes[0];
+      speed70.id = 'speed70_sign';
+      speed70.name ='speed70_sign';
+      speed70.descript = 'Ограничение скорости 70 км/ч';
+      speed70.scaling = new BABYLON.Vector3(2, 2, 2);
+      speed70.position = new BABYLON.Vector3(6, 0, 13);
+      shadowGenerator.addShadowCaster(speed70);
+      speed70.receiveShadows = true;
+      speed70.checkCollisions = true;
+      speed70.physicsImpostor = new BABYLON.PhysicsImpostor(speed70, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      sceneObjectList.push(speed70);
+    })
 
     
 
@@ -861,13 +956,20 @@ function hendsCreate(params) {
       // console.log(meshes);
       let allManHends = meshes[0];
       allManHends.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
-      allManHends.position = new BABYLON.Vector3(10, 2, -10);
+      
       shadowGenerator.addShadowCaster(allManHends);
       allManHends.receiveShadows = true;
       allManHends.checkCollisions = true;
       // NewJarsi.physicsImpostor = new BABYLON.PhysicsImpostor(NewJarsi, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);      
       allManHends.rotate(BABYLON.Axis.Y, 3*Math.PI/2, BABYLON.Space.WORLD);
       allManHends.rotate(BABYLON.Axis.X, Math.PI/2, BABYLON.Space.WORLD);
+      let camPosition = scene.activeCamera._position;
+      allManHends.position = camPosition;
+      console.log(allManHends.position);
+      allManHends.position._z = allManHends.position._z + 10;
+      // new BABYLON.Vector3(10, 2, -20);
+      allManHends.position = new BABYLON.Vector3(10, 2, -20);
+      // allManHends.position = new BABYLON.Vector3(10, 2, -10);
       // sceneObjectList.push(town); panelHause
     })
   } else if(params === 'delete') {
@@ -880,10 +982,8 @@ function hendsCreate(params) {
         scene.meshes.splice(scene.meshes.indexOf(element), 2);
       }
     });
-  }
-  
+  }  
 }
-
 // ============================================
 // Логика
 // ============================================
@@ -901,6 +1001,7 @@ scene.registerBeforeRender(() => {
 
 // Запуск движка
 engine.runRenderLoop(() => {
+
   scene.render();
   
 });
