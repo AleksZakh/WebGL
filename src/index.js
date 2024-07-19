@@ -51,6 +51,15 @@ light.intensity = 0.3;
 let shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
 
 // Инициализация камер
+
+let camera1 = new BABYLON.ArcRotateCamera("camera1", Math.PI / 2, Math.PI / 4, 10, new BABYLON.Vector3(0, -5, 0), scene);
+scene.activeCamera = camera1;
+scene.activeCamera.attachControl(canvas, true);
+camera1.lowerRadiusLimit = 2;
+camera1.upperRadiusLimit = 10;
+camera1.wheelDeltaPercentage = 0.01;
+
+
 const rotateCamera = new BABYLON.ArcRotateCamera("rotateCamera", 0, 0, 10, new BABYLON.Vector3(0, 0, 0), scene); // Параметры: название, альфа, бета, радиус, целевая позиция, сцена
 rotateCamera.setPosition(new BABYLON.Vector3(0, 15, -50)); // Позиционирует камеру, перезаписывая альфа, бета, радиус
 rotateCamera.setTarget(BABYLON.Vector3.Zero());
@@ -767,7 +776,7 @@ async function main() {
       separation.receiveShadows = true;
       separation.checkCollisions = true;
       separation.physicsImpostor = new BABYLON.PhysicsImpostor(separation, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
-      separation.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
+      separation.rotate(BABYLON.Axis.Y, Math.PI/2, BABYLON.Space.WORLD);
       // sceneObjectList.push(town); panelHause
     })
 
@@ -944,6 +953,19 @@ async function main() {
       sceneObjectList.push(speed70);
     })
 
+    BABYLON.SceneLoader.ImportMesh(null, "./models/Konusy/", "scene.gltf", scene, function (meshes, particleSystems, skeletons) {
+      // console.log(meshes);
+      let Konus = meshes[0];
+      Konus.scaling = new BABYLON.Vector3(15, 15, 15);
+      Konus.position = new BABYLON.Vector3(10, 0.3, -20);
+      shadowGenerator.addShadowCaster(Konus);
+      Konus.receiveShadows = true;
+      Konus.checkCollisions = true;
+      Konus.physicsImpostor = new BABYLON.PhysicsImpostor(Konus, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);
+      Konus.rotate(BABYLON.Axis.Y, Math.PI/2, BABYLON.Space.WORLD);
+      // sceneObjectList.push(town); panelHause
+    })
+
     
 
   // =========== Внешние объекты (кон.) ===========
@@ -951,25 +973,36 @@ async function main() {
 }
 
 function hendsCreate(params) {
+  let allManHends;
   if(params === 'create'){
     BABYLON.SceneLoader.ImportMesh(null, "./models/allManHends/", "all-man-hend.gltf", scene, function (meshes, particleSystems, skeletons) {
       // console.log(meshes);
-      let allManHends = meshes[0];
+      allManHends = meshes[0];
       allManHends.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
       
       shadowGenerator.addShadowCaster(allManHends);
       allManHends.receiveShadows = true;
       allManHends.checkCollisions = true;
+      console.log(scene.activeCamera);
       // NewJarsi.physicsImpostor = new BABYLON.PhysicsImpostor(NewJarsi, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0 }, scene);      
       allManHends.rotate(BABYLON.Axis.Y, 3*Math.PI/2, BABYLON.Space.WORLD);
       allManHends.rotate(BABYLON.Axis.X, Math.PI/2, BABYLON.Space.WORLD);
-      let camPosition = scene.activeCamera._position;
-      allManHends.position = camPosition;
+      allManHends.position = new BABYLON.Vector3(15, 1, -10);
+      scene.activeCamera.position = new BABYLON.Vector3(allManHends.position._x, allManHends.position._y+1, allManHends.position._z-1.3);
+      scene.activeCamera.target = new BABYLON.Vector3(allManHends.position._x, allManHends.position._y, allManHends.position._z+5);
+      // scene.activeCamera.target._z += 10;
+
+      // scene.activeCamera.target = allManHends;
+      // scene.activeCamera.target._z += 10;
+      // scene.activeCamera.rotation = new BABYLON.Vector3(0, 0, 0); // new BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
+      // allManHends.position = camPosition;
       console.log(allManHends.position);
-      allManHends.position._z = allManHends.position._z + 10;
+      // allManHends.position._z = allManHends.position._z + 10;
       // new BABYLON.Vector3(10, 2, -20);
-      allManHends.position = new BABYLON.Vector3(10, 2, -20);
-      // allManHends.position = new BABYLON.Vector3(10, 2, -10);
+      // allManHends.position = new BABYLON.Vector3(10, 2, -20);
+      
+      // scene.activeCamera.position = allManHends.position;
+      // scene.activeCamera.position._z = scene.activeCamera.position._z - 10;
       // sceneObjectList.push(town); panelHause
     })
   } else if(params === 'delete') {
@@ -982,7 +1015,8 @@ function hendsCreate(params) {
         scene.meshes.splice(scene.meshes.indexOf(element), 2);
       }
     });
-  }  
+  }
+  return allManHends;
 }
 // ============================================
 // Логика
@@ -1001,7 +1035,25 @@ scene.registerBeforeRender(() => {
 
 // Запуск движка
 engine.runRenderLoop(() => {
+  let cameraZPos = 0;
+  let hendsMashIndex = [];
+  scene.meshes.forEach(element => {
+    if(element.name.includes('Male_hand_40plus')) {
+      hendsMashIndex.push(scene.meshes.indexOf(element));
+      // scene.meshes.splice(scene.meshes.indexOf(element), 2);
+    }
+  });
+  // console.log(hendsMashIndex);
+  if(hendsMashIndex != []) {
+    // console.log(scene.meshes[hendsMashIndex]);
+    // scene.meshes[hendsMashIndex]._position = camera1.rotation;
+    // scene.activeCamera.position._z -= 0.5;
 
+    // scene.activeCamera.position = new BABYLON.Vector3(0, 0, 0);
+  }
+    
+  
+  
   scene.render();
   
 });
@@ -1016,24 +1068,53 @@ avtodorSpinner('off');
 let signList = [];
 let objPosition = {};
 
+let allManHends;
+
+function hendsMove(params, camPosition) {
+  let mashesIndexList = [];
+  let camera1 = scene.activeCamera;
+  console.log(camera1);
+  scene.meshes.forEach(element => {
+    if(element.name.includes('Male_hand_40plus')) {
+      mashesIndexList.push(scene.meshes.indexOf(element));
+    }
+  });
+  
+
+  if(params === 'arrowUp') {
+    scene.meshes[mashesIndexList[0]]._position._z += 0.5;
+    scene.meshes[mashesIndexList[1]]._position._z += 0.5;
+  } else if(params === 'arrowDown') {
+    scene.meshes[mashesIndexList[0]]._position._z -= 0.5;
+    scene.meshes[mashesIndexList[1]]._position._z -= 0.5;
+  }
+
+
+  // if(mashesIndexList != []) {
+  //   console.log(scene.meshes[mashesIndexList[0]]);
+  //   scene.meshes[mashesIndexList[0]]._position = new BABYLON.Vector3(camera1._position._x, camera1._position._y, camera1._position._z); // camera1._position;
+  //   scene.meshes[mashesIndexList[1]]._position = new BABYLON.Vector3(camera1._position._x, camera1._position._y, camera1._position._z);
+  // }
+}
+
 canvas.addEventListener('keydown', (event) => {
   let camPosition = scene.activeCamera._position;
   let messageArea = document.getElementById('message-area');
   let textArea = document.getElementById('add-info-text-area');
   // console.log(event.key);
   // console.log(sceneObjectList);
+  hendsMove(event.key, camPosition);
   if(scene.activeCamera.id == 'UniversalCamera') {
     if(event.key === 'Control') {
       console.log(camPosition);
-      sceneObjectList.forEach(element => {
-        let elementPosition = element._position;
-        console.log('###############');
-        console.log('X = ', (camPosition.x - elementPosition.x));
-        console.log('Z = ', (camPosition.z - elementPosition.z));
-        console.log('Y = ', (camPosition.y - elementPosition.y));
-        console.log('$$$$$$$$$$$$$$$$');
-      });      
-      
+      // sceneObjectList.forEach(element => {
+      //   let elementPosition = element._position;
+      //   console.log('###############');
+      //   console.log('X = ', (camPosition.x - elementPosition.x));
+      //   console.log('Z = ', (camPosition.z - elementPosition.z));
+      //   console.log('Y = ', (camPosition.y - elementPosition.y));
+      //   console.log('$$$$$$$$$$$$$$$$');
+      // });      
     }
     if(event.key === 'Shift') {
       universaCamera.speed = 0.6;
@@ -1088,7 +1169,9 @@ canvas.addEventListener('keydown', (event) => {
       }
       
     });
-  }  
+  } else if(scene.activeCamera.id == 'Camera') {
+    if(event.key === 'Shift') {}
+  }
 })
 canvas.addEventListener('keyup', (event) => {
   if(scene.activeCamera.id == 'UniversalCamera') {
@@ -1110,10 +1193,6 @@ else if ("onmozpointerlockchange" in document) {
 }
 
 
-
-
-
-
 document.querySelectorAll('#user-interface .type-btn-group button').forEach(button => {
   button.addEventListener('click', () => {
     console.log(button.classList[1]);
@@ -1125,14 +1204,16 @@ document.querySelectorAll('#user-interface .type-btn-group button').forEach(butt
       button.classList.add = 'btn-outline-dark';
     }
     if(button.id === 'move-btn') {
+      // scene.activeCamera = camera1;
       scene.activeCamera = universaCamera;
-      universaCamera._position = new BABYLON.Vector3(10, 2, -20);
-      universaCamera.setTarget(new BABYLON.Vector3(10, 1, 2));
+      // universaCamera._position = new BABYLON.Vector3(10, 2, -20);
+      // universaCamera.setTarget(new BABYLON.Vector3(10, 1, 2));
       universaCamera.speed = 0.1;
       universaCamera.applyGravity = true;
       canvas.addEventListener("pointerup", lockEnable);
-      console.log(universaCamera)
-      hendsCreate('create');
+      // console.log(universaCamera)
+      // allManHends = hendsCreate('create');
+      console.log(hendsCreate('create'));
     } else if(button.id === 'eye-btn') {
       scene.activeCamera = rotateCamera;
       rotateCamera.setPosition(new BABYLON.Vector3(0, 15, 45));
